@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="32px" height="32px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 61.2 (89653) - https://sketch.com -->
+    <title>Icons/Navigation Bar/Chat - Active</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Icons/Navigation-Bar/Chat---Active" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect id="Icon-Background" fill-opacity="0" fill="#000000" x="0" y="0" width="32" height="32"></rect>
+        <path d="M16,25.3032478 C22.3512746,25.3032478 27.5,20.8701398 27.5,15.4016239 C27.5,9.93310803 22.3512746,5.5 16,5.5 C9.64872538,5.5 4.5,9.93310803 4.5,15.4016239 C4.5,18.3562737 6.00304776,21.0086607 8.3867197,22.8228717 L8.03930791,25.8502995 C8.00264078,26.1698254 8.22863065,26.458962 8.54407042,26.4961041 C8.6519402,26.5088054 8.76115563,26.4903044 8.85907622,26.4427422 L12.2894723,24.7765231 C13.4535902,25.1179982 14.7016692,25.3032478 16,25.3032478 Z" id="Chat_Active" fill="#000000"></path>
+    </g>
+</svg>

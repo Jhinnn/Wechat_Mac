@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="32px" height="32px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 61.2 (89653) - https://sketch.com -->
+    <title>Icons/Navigation Bar/Folder</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Icons/Navigation-Bar/Folder" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect id="Icon-Background" fill-opacity="0" fill="#000000" x="0" y="0" width="32" height="32"></rect>
+        <path d="M27,23.4375 C27,24.0243025 26.5075132,24.5 25.9,24.5 L6.1,24.5 C5.49248678,24.5 5,24.0243025 5,23.4375 L5,8.5625 C5,7.97569745 5.49248678,7.5 6.1,7.5 L12.425,7.5 L14.4875,9.09375 L25.9,9.09375 C26.5075132,9.09375 27,9.56944745 27,10.15625 L27,23.4375 Z M25.68,14.087 L6.32,14.087 L6.32,23.225 L25.68,23.225 L25.68,14.087 Z M11.961969,8.775 L6.32,8.775 L6.32,12.812 L25.68,12.812 L25.68,10.36875 L14.024469,10.36875 L11.961969,8.775 Z" id="Folder" fill="#000000"></path>
+    </g>
+</svg>

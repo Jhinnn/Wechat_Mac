@@ -1,0 +1,72 @@
+{
+    "conversation": [
+        {
+            "userId": "uslfj23jljf232or2jor",
+            "userName": "一棵树",
+            "icon": "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fblog%2F202107%2F12%2F20210712160723_84b09.thumb.1000_0.jpg&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1678414223&t=bc725cf183137f0cda68edf40c47bc2c",
+            "content": "新年快乐",
+            "isSelf": false
+        },
+        {
+            "userId": "2o8379uroweurqsdfa",
+            "userName": "徐志科",
+            "icon": "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fblog%2F202103%2F23%2F20210323132934_d2473.thumb.1000_0.png&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1678416650&t=3fa34a17cfe6aa35381f56df9b6beb4e",
+            "content": "没事这不是什么大事",
+            "isSelf": false
+        },
+        {
+            "userId": "sldfjasldfjasldfjal",
+            "userName": "盼盼堂",
+            "icon": "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fitem%2F201706%2F30%2F20170630004557_GLmWV.jpeg&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1678416650&t=832065c437fd74931330b16289edbc8ag",
+            "content": "大家都快了，希望大家在新的一年里都能够快快乐乐",
+            "isSelf": true
+        },
+        {
+            "userId": "2098rlsjdflasjdlfjasdfasd",
+            "userName": "张德强",
+            "icon": "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fblog%2F202106%2F13%2F20210613110106_f0776.thumb.1000_0.jpeg&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1678416650&t=7769d0745da4f0154390c8e15792a9ca",
+            "content": "祝你在新的一年里越来越帅",
+            "isSelf": false
+        }, {
+            "userId": "2o8379uroweurqsdfa",
+            "userName": "徐志科",
+            "icon": "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fblog%2F202103%2F23%2F20210323132934_d2473.thumb.1000_0.png&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1678416650&t=3fa34a17cfe6aa35381f56df9b6beb4e",
+            "content": "没事这不是什么大事",
+            "isSelf": false
+        },
+        {
+            "userId": "sldfjasldfjasldfjal",
+            "userName": "盼盼堂",
+            "icon": "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fitem%2F201706%2F30%2F20170630004557_GLmWV.jpeg&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1678416650&t=832065c437fd74931330b16289edbc8ag",
+            "content": "新年快乐啊",
+            "isSelf": true
+        },
+        {
+            "userId": "2098rlsjdflasjdlfjasdfasd",
+            "userName": "张德强",
+            "icon": "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fblog%2F202106%2F13%2F20210613110106_f0776.thumb.1000_0.jpeg&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1678416650&t=7769d0745da4f0154390c8e15792a9ca",
+            "content": "祝你在新的一年里越来越帅",
+            "isSelf": false
+        } ,{
+            "userId": "2o8379uroweurqsdfa",
+            "userName": "徐志科",
+            "icon": "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fblog%2F202103%2F23%2F20210323132934_d2473.thumb.1000_0.png&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1678416650&t=3fa34a17cfe6aa35381f56df9b6beb4e",
+            "content": "没事这不是什么大事",
+            "isSelf": false
+        },
+        {
+            "userId": "sldfjasldfjasldfjal",
+            "userName": "盼盼堂",
+            "icon": "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fitem%2F201706%2F30%2F20170630004557_GLmWV.jpeg&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1678416650&t=832065c437fd74931330b16289edbc8ag",
+            "content": "新年快乐啊",
+            "isSelf": true
+        },
+        {
+            "userId": "2098rlsjdflasjdlfjasdfasd",
+            "userName": "张德强",
+            "icon": "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fblog%2F202106%2F13%2F20210613110106_f0776.thumb.1000_0.jpeg&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1678416650&t=7769d0745da4f0154390c8e15792a9ca",
+            "content": "祝你在新的一年里越来越帅",
+            "isSelf": false
+        }
+    ]
+}
