@@ -1,5 +1,17 @@
 Flutter Wechat Macos
 
+主要框架
+
+窗口管理：window_manager
+数据库管理：hive_flutter
+状态管理：flutter_riverpod
+
+其他
+图片管理：cached_network_image
+聊天气泡管理：bubble
+用户名：username
+图标：flutter_svg
+
 
 聊天界面
 ![WX20230213-163104@2x](https://user-images.githubusercontent.com/17973224/218419164-2a93f01c-8949-40d9-9b86-eec7aa278dd8.png)
