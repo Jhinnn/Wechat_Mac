@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hive_flutter/adapters.dart';
 import 'package:wechat/hive/contacts_adapter.dart';
+import 'package:wechat/page/collect/collect_detail_page.dart';
 import 'package:wechat/page/collect/collect_page.dart';
 import 'package:wechat/page/contacts/contacts_detail_page.dart';
 import 'package:wechat/page/conversation/wechat_conversation_list_page.dart';
-import 'package:wechat/page/conversation/wechat_conversation_widget.dart';
 import 'package:wechat/page/conversation/wechat_conversation_page.dart';
-import 'package:wechat/hive/conversation_list_adapter.dart';
 import 'package:wechat/hive/hive_tool.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:random_string/random_string.dart';
 
 import 'contacts/contacts_page.dart';
 
@@ -28,6 +25,8 @@ class WechatHomePage extends StatefulWidget {
 
 class _WechatHomePageState extends State<WechatHomePage> {
   DBUtil? dbUtil;
+
+  List<String> collectList = ['全部收藏', '图片与视频', '链接', '笔记', '文件', '语音', '聊天记录'];
   @override
   void initState() {
     init();
@@ -47,49 +46,21 @@ class _WechatHomePageState extends State<WechatHomePage> {
       body: Row(children: [
         const WechatTabbar(),
         Consumer(builder: (context, ref, child) {
-          return IndexedStack(
-            index: ref.watch(tabbarSelectedIndex) - 1,
-            children: [
-              WechatConversataionListPage(dbUtil: dbUtil),
-              ContactsPage(
-                dbUtil: dbUtil,
-              ),
-              const CollectPage(),
-            ],
+          return Expanded(
+            child: IndexedStack(
+              index: ref.watch(tabbarSelectedIndex) - 1,
+              children: [
+                WechatConversataionListPage(dbUtil: dbUtil),
+                ContactsPage(
+                  dbUtil: dbUtil,
+                ),
+                const CollectPage(),
+              ],
+            ),
           );
         }),
-        const VerticalDivider(
-          color: Color.fromRGBO(228, 223, 222, 1),
-          thickness: 0,
-          width: 1,
-        ),
-        Expanded(
-          child: Consumer(
-            builder: (context, ref, child) {
-              List<ContactsModel> result =
-                  dbUtil!.contactsBox.values.toList().cast<ContactsModel>();
-              int? index = ref.watch(pageIndexProvider);
-
-              int? contactIndex = ref.watch(contactProvider);
-              return IndexedStack(
-                index: index,
-                children: [
-                  _conversationWidget(),
-                  contactIndex == null
-                      ? Container(
-                          color: const Color.fromRGBO(243, 243, 243, 1),
-                        )
-                      : Container(
-                          color: Colors.white,
-                          child: ContactsDetailPage(
-                            contactsModel: result[contactIndex],
-                          ),
-                        ),
-                ],
-              );
-            },
-          ),
-        )
+       
+       
       ]),
     );
   }
@@ -243,97 +214,7 @@ class _WechatHomePageState extends State<WechatHomePage> {
   }
   */
 
-  _conversationWidget() {
-    return Container(
-      color: const Color.fromRGBO(243, 243, 243, 1),
-      child: Column(
-        children: [
-          Container(
-            height: 60,
-            padding: const EdgeInsets.only(left: 20, right: 20, top: 6),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Text('一棵树',
-                    style: TextStyle(color: Colors.black, fontSize: 16)),
-                Icon(
-                  Icons.more_horiz,
-                  size: 25,
-                  color: Colors.black,
-                )
-              ],
-            ),
-          ),
-          const Divider(
-            color: Color.fromRGBO(228, 223, 222, 1),
-            thickness: 0,
-            height: 1,
-          ),
-          Expanded(
-              child: Container(
-            color: const Color.fromRGBO(243, 243, 243, 1),
-            child: const ConversationWidget(),
-          )),
-          const Divider(
-            color: Color.fromRGBO(228, 223, 222, 1),
-            height: 1,
-            thickness: 0,
-          ),
-          Container(
-            height: 156,
-            margin: const EdgeInsets.symmetric(horizontal: 16),
-            child: Column(
-              children: [
-                Container(
-                  height: 48,
-                  padding: const EdgeInsets.only(top: 14),
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            Image.asset('assets/images/biaoqing.png',
-                                width: 28),
-                            const SizedBox(width: 16),
-                            Image.asset('assets/images/wenjianjia_o.png',
-                                width: 28),
-                            const SizedBox(width: 18),
-                            Row(
-                              children: [
-                                Image.asset('assets/images/jianqie.png',
-                                    width: 20),
-                                const Icon(
-                                  Icons.keyboard_arrow_down,
-                                  color: Color(0xff2c2c2c),
-                                  size: 12,
-                                )
-                              ],
-                            ),
-                            const SizedBox(width: 16),
-                            Image.asset('assets/images/xiaoxi.png', width: 23),
-                          ],
-                        ),
-                        Image.asset('assets/images/shipintonghua.png',
-                            width: 18),
-                      ]),
-                ),
-                const Expanded(
-                    child: TextField(
-                  cursorWidth: 0.8,
-                  cursorHeight: 15,
-                  cursorColor: Colors.black,
-                  maxLines: 10,
-                  style:
-                      TextStyle(fontSize: 14, color: Colors.black, height: 1.3),
-                  decoration: InputDecoration(border: InputBorder.none),
-                )),
-              ],
-            ),
-          )
-        ],
-      ),
-    );
-  }
+  
 }
 
 class WechatTabbar extends ConsumerWidget {
@@ -400,9 +281,15 @@ class WechatTabbar extends ConsumerWidget {
                     )),
                 const SizedBox(height: 18),
                 InkWell(
-                    onTap: () => ref
+                    onTap: () {
+                      ref
                         .read(tabbarSelectedIndex.notifier)
-                        .update((state) => state = 3),
+                          .update((state) => state = 3);
+
+                      ref
+                          .read(pageIndexProvider.notifier)
+                          .update((state) => state = 2);
+                    },
                     child: SvgPicture.asset(
                       index == 3
                           ? 'assets/images/TabBar_Favorites_Selected.svg'

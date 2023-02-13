@@ -23,7 +23,6 @@ class WechatConversataionWidget extends ConsumerWidget {
               ref
                   .read(conversationSelectedIndex.notifier)
                   .update((state) => state = index);
-              // onTap(index);
             },
             child: Container(
               padding: const EdgeInsets.only(
@@ -36,24 +35,24 @@ class WechatConversataionWidget extends ConsumerWidget {
               height: 68,
               child: Row(
                 children: [
-                  // conversationList.conversationType == 1
-                  //     ? ClipRRect(
-                  //         borderRadius: BorderRadius.circular(4),
-                  //         child: CachedNetworkImage(
-                  //           imageUrl: conversationList.userIcon,
-                  //           width: 35,
-                  //           height: 35,
-                  //         ))
-                  //     : ClipRRect(
-                  //         borderRadius: BorderRadius.circular(4),
-                  //         child: CachedNetworkImage(
-                  //           imageUrl: conversationList
-                  //               .groupMemberList!.first.userIcon,
-                  //           width: 35,
-                  //           height: 35,
-                  //         )),
-                  RandomAvatar(conversationList.userName,
-                      height: 35, width: 35, fit: BoxFit.fitWidth),
+                  conversationList.conversationType == 1
+                      ? ClipRRect(
+                          borderRadius: BorderRadius.circular(4),
+                          child: CachedNetworkImage(
+                            imageUrl: conversationList.userIcon,
+                            width: 35,
+                            height: 35,
+                          ))
+                      : ClipRRect(
+                          borderRadius: BorderRadius.circular(4),
+                          child: CachedNetworkImage(
+                            imageUrl: conversationList
+                                .groupMemberList!.first.userIcon,
+                            width: 35,
+                            height: 35,
+                          )),
+                  // RandomAvatar(conversationList.userName,
+                  //     height: 35, width: 35, fit: BoxFit.fitWidth),
                   const SizedBox(width: 10),
                   SizedBox(
                     height: 38,

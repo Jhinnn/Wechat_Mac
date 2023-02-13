@@ -1,7 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:random_avatar/random_avatar.dart';
 import 'package:wechat/hive/contacts_adapter.dart';
+import 'package:wechat/page/wechat_home_page.dart';
 
 class ContactsDetailPage extends ConsumerWidget {
   final ContactsModel contactsModel;
@@ -42,13 +43,12 @@ class ContactsDetailPage extends ConsumerWidget {
                     width: 20,
                   ),
                   ClipRRect(
-                    borderRadius: BorderRadius.circular(4),
-                    child: RandomAvatar(
-                      contactsModel.contactName,
-                      height: 85,
-                      width: 85,
-                    ),
-                  )
+                      borderRadius: BorderRadius.circular(4),
+                      child: CachedNetworkImage(
+                        imageUrl: contactsModel.userIcon,
+                        width: 85,
+                        height: 85,
+                      ))
                 ],
               ),
               const SizedBox(
@@ -143,18 +143,22 @@ class ContactsDetailPage extends ConsumerWidget {
             ],
           ),
 
-          TextButton (
-                    onPressed: () {},
-                    style: ButtonStyle(
-                      fixedSize:MaterialStateProperty.all<Size>(const Size(140, 36)), 
-                      backgroundColor: MaterialStateProperty.all<Color>(const Color.fromARGB(255, 22, 187, 7)),
-                      foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-                    ),
-                    child: const Text("发消息")
-                )
-//更多请阅读：https://www.yiibai.com/flutter/flutter-textbutton.html
-
-
+          TextButton(
+              onPressed: () {
+                ref
+                    .read(pageIndexProvider.notifier)
+                    .update((state) => state = 0);
+                ref
+                    .read(tabbarSelectedIndex.notifier)
+                    .update((state) => state = 1);
+              },
+              style: ButtonStyle(
+                fixedSize: MaterialStateProperty.all<Size>(const Size(140, 36)),
+                backgroundColor: MaterialStateProperty.all<Color>(
+                    const Color.fromARGB(255, 22, 187, 7)),
+                foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+              ),
+              child: const Text("发消息"))
         ],
       ),
     );

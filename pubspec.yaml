@@ -110,6 +110,15 @@ flutter:
     - assets/images/icons_outlined_favorites.svg
     - assets/images/icons_outlined_folder.svg
 
+    - assets/images/cchat.png
+    - assets/images/cyuyin.png
+    - assets/images/cwenjian.png
+    - assets/images/cbiji.png
+    - assets/images/clianjie.png
+    - assets/images/cquanbu.png
+    - assets/images/ctupian.png
+    - assets/images/cyuyin.png
+
     - assets/json/conversation_list.json
     - assets/json/conversation.json
 
