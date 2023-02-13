@@ -3,6 +3,7 @@ Flutter Wechat Macos
 主要框架
 
 窗口管理：window_manager
+多窗口管理：desktop_multi_window
 数据库管理：hive_flutter
 状态管理：flutter_riverpod
 
