@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:desktop_multi_window/desktop_multi_window.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wechat/hive/contacts_adapter.dart';
@@ -301,11 +304,27 @@ class WechatTabbar extends ConsumerWidget {
                           : Colors.black54,
                     )),
                 const SizedBox(height: 18),
-                SvgPicture.asset(
-                  'assets/images/TabBar_Folder.svg',
-                  width: 30,
-                  height: 30,
-                  color: Colors.black54,
+                InkWell(
+                  onTap: () async {
+                    final window =
+                        await DesktopMultiWindow.createWindow(jsonEncode({
+                      'args1': 'Sub window',
+                      'args2': 100,
+                      'args3': true,
+                      'bussiness': 'bussiness_test',
+                    }));
+                    window
+                      ..setFrame(const Offset(0, 0) & const Size(790, 720))
+                      ..center()
+                      ..setTitle('Another window')
+                      ..show();
+                  },
+                  child: SvgPicture.asset(
+                    'assets/images/TabBar_Folder.svg',
+                    width: 30,
+                    height: 30,
+                    color: Colors.black54,
+                  ),
                 ),
                 const SizedBox(height: 18),
                 SvgPicture.asset(

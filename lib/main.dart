@@ -1,15 +1,31 @@
 import 'dart:io';
+import 'package:desktop_multi_window/desktop_multi_window.dart';
 import 'package:flutter/material.dart';
 import 'package:wechat/hive/hive_tool.dart';
+import 'package:wechat/page/document/document_page.dart';
 import 'package:wechat/page/wechat_home_page.dart';
 import 'package:window_manager/window_manager.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-void main() async {
-  await initWindow();
+import 'dart:convert';
+import 'package:collection/collection.dart';
 
-  await initHive();
+void main(List<String> args) async {
+  if (args.firstOrNull == 'multi_window') {
+    final windowId = int.parse(args[1]);
+    final argument = args[2].isEmpty
+        ? const {}
+        : jsonDecode(args[2]) as Map<String, dynamic>;
+    runApp(DocumentPage(
+      windowController: WindowController.fromWindowId(windowId),
+      args: argument,
+    ));
+  } else {
+    await initWindow();
 
-  runApp(const ProviderScope(child:MyApp()));
+    await initHive();
+
+    runApp(const ProviderScope(child: MyApp()));
+  }
 }
 
 initHive() async {

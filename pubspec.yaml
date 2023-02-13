@@ -47,6 +47,7 @@ dependencies:
   username: ^0.2.3
   random_avatar: ^0.0.8
   flutter_svg: ^2.0.0+1
+  desktop_multi_window: ^0.2.0
 
 dev_dependencies:
   flutter_test:
