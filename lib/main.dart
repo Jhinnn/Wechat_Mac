@@ -15,10 +15,11 @@ void main(List<String> args) async {
     final argument = args[2].isEmpty
         ? const {}
         : jsonDecode(args[2]) as Map<String, dynamic>;
-    runApp(DocumentPage(
+    runApp(ProviderScope(
+        child: DocumentPage(
       windowController: WindowController.fromWindowId(windowId),
       args: argument,
-    ));
+    )));
   } else {
     await initWindow();
 

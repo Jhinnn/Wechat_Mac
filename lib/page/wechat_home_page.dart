@@ -314,7 +314,7 @@ class WechatTabbar extends ConsumerWidget {
                       'bussiness': 'bussiness_test',
                     }));
                     window
-                      ..setFrame(const Offset(0, 0) & const Size(790, 720))
+                      ..setFrame(const Offset(0, 0) & const Size(810, 700))
                       ..center()
                       ..setTitle('Another window')
                       ..show();
