@@ -3,6 +3,7 @@ import 'package:desktop_multi_window/desktop_multi_window.dart';
 import 'package:flutter/material.dart';
 import 'package:wechat/hive/hive_tool.dart';
 import 'package:wechat/page/document/document_page.dart';
+import 'package:wechat/page/sns/sns_page.dart';
 import 'package:wechat/page/wechat_home_page.dart';
 import 'package:window_manager/window_manager.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -15,11 +16,20 @@ void main(List<String> args) async {
     final argument = args[2].isEmpty
         ? const {}
         : jsonDecode(args[2]) as Map<String, dynamic>;
-    runApp(ProviderScope(
-        child: DocumentPage(
-      windowController: WindowController.fromWindowId(windowId),
-      args: argument,
-    )));
+    int windows = argument['args2'];
+    if (windows == 0) {
+      runApp(ProviderScope(
+          child: DocumentPage(
+        windowController: WindowController.fromWindowId(windowId),
+        args: argument,
+      )));
+    } else if (windows == 1) {
+      runApp(ProviderScope(
+          child: SNSPage(
+        windowController: WindowController.fromWindowId(windowId),
+        args: argument,
+      )));
+    }
   } else {
     await initWindow();
 

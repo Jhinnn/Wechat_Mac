@@ -147,7 +147,7 @@ class DocumentPage extends ConsumerWidget {
                                       children: [
                                         Row(
                                           children: [
-                                            Icon(
+                                            const Icon(
                                               Icons.file_copy,
                                               size: 35,
                                               color: Colors.grey,

@@ -308,15 +308,15 @@ class WechatTabbar extends ConsumerWidget {
                   onTap: () async {
                     final window =
                         await DesktopMultiWindow.createWindow(jsonEncode({
-                      'args1': 'Sub window',
-                      'args2': 100,
+                      'args1': 'file window',
+                      'args2': 0,
                       'args3': true,
                       'bussiness': 'bussiness_test',
                     }));
                     window
                       ..setFrame(const Offset(0, 0) & const Size(810, 700))
                       ..center()
-                      ..setTitle('Another window')
+                      ..setTitle('file window')
                       ..show();
                   },
                   child: SvgPicture.asset(
@@ -327,11 +327,27 @@ class WechatTabbar extends ConsumerWidget {
                   ),
                 ),
                 const SizedBox(height: 18),
-                SvgPicture.asset(
-                  'assets/images/TabBar_SNS.svg',
-                  width: 30,
-                  height: 30,
-                  color: Colors.black54,
+                InkWell(
+                  onTap: () async {
+                    final window =
+                        await DesktopMultiWindow.createWindow(jsonEncode({
+                      'args1': 'sns window',
+                      'args2': 1,
+                      'args3': true,
+                      'bussiness': 'bussiness_test',
+                    }));
+                    window
+                      ..setFrame(const Offset(0, 0) & const Size(550, 600))
+                      ..center()
+                      ..setTitle('sns window')
+                      ..show();
+                  },
+                  child: SvgPicture.asset(
+                    'assets/images/TabBar_SNS.svg',
+                    width: 30,
+                    height: 30,
+                    color: Colors.black54,
+                  ),
                 ),
               ],
             ),
