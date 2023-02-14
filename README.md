@@ -22,3 +22,5 @@ Flutter Wechat Macos
 
 收藏
 ![WX20230213-163125@2x](https://user-images.githubusercontent.com/17973224/218419289-00e694ad-7a1f-4bc5-b9e9-c4f508b7f314.png)
+
+聊天文件
