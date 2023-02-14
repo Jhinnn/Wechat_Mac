@@ -24,3 +24,4 @@ Flutter Wechat Macos
 ![WX20230213-163125@2x](https://user-images.githubusercontent.com/17973224/218419289-00e694ad-7a1f-4bc5-b9e9-c4f508b7f314.png)
 
 聊天文件
+![WX20230214-111038@2x](https://user-images.githubusercontent.com/17973224/218629561-831943a6-bfac-47c6-ac55-41a31de0b400.png)
