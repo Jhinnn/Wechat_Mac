@@ -5,11 +5,22 @@ import 'package:random_string/random_string.dart';
 import 'package:username/username.dart';
 import 'package:wechat/hive/conversation_list_adapter.dart';
 import 'package:wechat/hive/hive_tool.dart';
-import 'package:wechat/page/conversation/wechat_conversation_page.dart';
-import 'package:wechat/page/conversation/wechat_conversation_widget.dart';
+import 'package:wechat/page/conversation/wechat_conversataion_list_widget.dart';
+import 'package:wechat/page/conversation/wechat_conversation_window.dart';
+import 'package:wechat/page/conversation/wechat_message_widget.dart';
+import 'package:wechat/page/wechat_home_page.dart';
 
-class WechatConversataionListPage extends ConsumerWidget {
-  const WechatConversataionListPage({
+import '../../hive/conversation_adapter.dart';
+
+final List<String> imgList = [
+  "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fblog%2F202103%2F23%2F20210323132934_d2473.thumb.1000_0.png&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1678416650&t=3fa34a17cfe6aa35381f56df9b6beb4e",
+  "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fblog%2F202107%2F12%2F20210712160723_84b09.thumb.1000_0.jpg&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1678414223&t=bc725cf183137f0cda68edf40c47bc2c",
+  "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fitem%2F201706%2F30%2F20170630004557_GLmWV.jpeg&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1678416650&t=832065c437fd74931330b16289edbc8ag",
+  "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fblog%2F202106%2F13%2F20210613110106_f0776.thumb.1000_0.jpeg&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1678416650&t=7769d0745da4f0154390c8e15792a9ca",
+];
+
+class WechatConversataionPage extends ConsumerWidget {
+  const WechatConversataionPage({
     super.key,
     this.dbUtil,
   });
@@ -52,19 +63,18 @@ class WechatConversataionListPage extends ConsumerWidget {
                     ),
                     InkWell(
                       onTap: () {
-                        ConversationListModel conversationListModel =
-                            ConversationListModel(
-                                conversationId: randomAlphaNumeric(15),
-                                userID: randomAlphaNumeric(20),
-                                userName: Username.cn().fullname,
-                                userIcon:
-                                    "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fblog%2F202103%2F23%2F20210323132934_d2473.thumb.1000_0.png&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1678416650&t=3fa34a17cfe6aa35381f56df9b6beb4e",
-                                content: randomAlphaNumeric(20),
-                                conversationType: 1,
-                                isMute: 0,
-                                time: DateTime.now().toString());
-
-                        dbUtil!.conversationListBox.add(conversationListModel);
+                        ///添加联系人
+                        ConversationListModel conversation = ConversationListModel(
+                            conversationId: randomAlphaNumeric(15),
+                            userID: randomAlphaNumeric(20),
+                            userName: Username.cn().fullname,
+                            userIcon:
+                                "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fblog%2F202103%2F23%2F20210323132934_d2473.thumb.1000_0.png&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1678416650&t=3fa34a17cfe6aa35381f56df9b6beb4e",
+                            content: randomAlphaNumeric(20),
+                            conversationType: 1,
+                            isMute: 0,
+                            time: DateTime.now().toString());
+                        dbUtil!.conversationListBox.add(conversation);
                       },
                       child: Container(
                           width: 26,
@@ -88,7 +98,7 @@ class WechatConversataionListPage extends ConsumerWidget {
                           List<ConversationListModel> result = value.values
                               .toList()
                               .cast<ConversationListModel>();
-                          return WechatConversataionWidget(
+                          return WechatConversataionListWidget(
                             result: result,
                             onTap: (index) {
                               dbUtil!.conversationListBox.deleteAt(index);
@@ -103,102 +113,10 @@ class WechatConversataionListPage extends ConsumerWidget {
           thickness: 0,
           width: 1,
         ),
-        Expanded(child: _conversationWidget())
+        dbUtil == null
+            ? Container()
+            : Expanded(child: WechatConversataionListPage(dbUtil: dbUtil))
       ],
     );
   }
-
-  _conversationWidget() {
-    return Container(
-      color: const Color.fromRGBO(243, 243, 243, 1),
-      child: Column(
-        children: [
-          Container(
-            height: 60,
-            padding: const EdgeInsets.only(left: 20, right: 20, top: 6),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Text('一棵树',
-                    style: TextStyle(color: Colors.black, fontSize: 16)),
-                Icon(
-                  Icons.more_horiz,
-                  size: 25,
-                  color: Colors.black,
-                )
-              ],
-            ),
-          ),
-          const Divider(
-            color: Color.fromRGBO(228, 223, 222, 1),
-            thickness: 0,
-            height: 1,
-          ),
-          Expanded(
-              child: Container(
-            color: const Color.fromRGBO(243, 243, 243, 1),
-            child: const ConversationWidget(),
-          )),
-          const Divider(
-            color: Color.fromRGBO(228, 223, 222, 1),
-            height: 1,
-            thickness: 0,
-          ),
-          Container(
-            height: 156,
-            margin: const EdgeInsets.symmetric(horizontal: 16),
-            child: Column(
-              children: [
-                Container(
-                  height: 48,
-                  padding: const EdgeInsets.only(top: 14),
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            Image.asset('assets/images/biaoqing.png',
-                                width: 28),
-                            const SizedBox(width: 16),
-                            Image.asset('assets/images/wenjianjia_o.png',
-                                width: 28),
-                            const SizedBox(width: 18),
-                            Row(
-                              children: [
-                                Image.asset('assets/images/jianqie.png',
-                                    width: 20),
-                                const Icon(
-                                  Icons.keyboard_arrow_down,
-                                  color: Color(0xff2c2c2c),
-                                  size: 12,
-                                )
-                              ],
-                            ),
-                            const SizedBox(width: 16),
-                            Image.asset('assets/images/xiaoxi.png', width: 23),
-                          ],
-                        ),
-                        Image.asset('assets/images/shipintonghua.png',
-                            width: 18),
-                      ]),
-                ),
-                const Expanded(
-                    child: TextField(
-                  cursorWidth: 0.8,
-                  cursorHeight: 15,
-                  cursorColor: Colors.black,
-                  maxLines: 10,
-                  style:
-                      TextStyle(fontSize: 14, color: Colors.black, height: 1.3),
-                  decoration: InputDecoration(border: InputBorder.none),
-                )),
-              ],
-            ),
-          )
-        ],
-      ),
-    );
-  }
 }
-
-

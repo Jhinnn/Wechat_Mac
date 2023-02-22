@@ -1,13 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:random_avatar/random_avatar.dart';
 import 'package:wechat/hive/conversation_list_adapter.dart';
 import 'package:wechat/page/wechat_home_page.dart';
 
-class WechatConversataionWidget extends ConsumerWidget {
-  const WechatConversataionWidget(
-      {super.key,required this.onTap, required this.result});
+class WechatConversataionListWidget extends ConsumerWidget {
+  const WechatConversataionListWidget(
+      {super.key, required this.onTap, required this.result});
   final Function(int) onTap;
   final List<ConversationListModel> result;
 
@@ -23,6 +22,10 @@ class WechatConversataionWidget extends ConsumerWidget {
               ref
                   .read(conversationSelectedIndex.notifier)
                   .update((state) => state = index);
+
+              ref
+                  .read(conversationIdIndex.notifier)
+                  .update((state) => state = conversationList.conversationId);
             },
             child: Container(
               padding: const EdgeInsets.only(

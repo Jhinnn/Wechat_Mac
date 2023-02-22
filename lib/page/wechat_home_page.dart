@@ -8,13 +8,14 @@ import 'package:wechat/page/collect/collect_detail_page.dart';
 import 'package:wechat/page/collect/collect_page.dart';
 import 'package:wechat/page/contacts/contacts_detail_page.dart';
 import 'package:wechat/page/conversation/wechat_conversation_list_page.dart';
-import 'package:wechat/page/conversation/wechat_conversation_page.dart';
+import 'package:wechat/page/conversation/wechat_message_widget.dart';
 import 'package:wechat/hive/hive_tool.dart';
 import 'package:flutter_svg/svg.dart';
 
 import 'contacts/contacts_page.dart';
 
 final conversationSelectedIndex = StateProvider<int>((ref) => 1);
+final conversationIdIndex = StateProvider<String>((ref) => '');
 final tabbarSelectedIndex = StateProvider<int>((ref) => 1);
 
 final pageIndexProvider = StateProvider<int>((ref) => 0);
@@ -53,7 +54,7 @@ class _WechatHomePageState extends State<WechatHomePage> {
             child: IndexedStack(
               index: ref.watch(tabbarSelectedIndex) - 1,
               children: [
-                WechatConversataionListPage(dbUtil: dbUtil),
+                WechatConversataionPage(dbUtil: dbUtil),
                 ContactsPage(
                   dbUtil: dbUtil,
                 ),
