@@ -25,3 +25,6 @@ Flutter Wechat Macos
 
 聊天文件
 ![WX20230214-111038@2x](https://user-images.githubusercontent.com/17973224/218629561-831943a6-bfac-47c6-ac55-41a31de0b400.png)
+
+朋友圈
+![WX20230214-145718@2x](https://user-images.githubusercontent.com/17973224/218669350-30db3eab-a766-45bd-99b3-810a77d9efab.png)
