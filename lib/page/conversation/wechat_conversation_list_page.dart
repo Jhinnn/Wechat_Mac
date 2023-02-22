@@ -7,17 +7,7 @@ import 'package:wechat/hive/conversation_list_adapter.dart';
 import 'package:wechat/hive/hive_tool.dart';
 import 'package:wechat/page/conversation/wechat_conversataion_list_widget.dart';
 import 'package:wechat/page/conversation/wechat_conversation_window.dart';
-import 'package:wechat/page/conversation/wechat_message_widget.dart';
-import 'package:wechat/page/wechat_home_page.dart';
 
-import '../../hive/conversation_adapter.dart';
-
-final List<String> imgList = [
-  "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fblog%2F202103%2F23%2F20210323132934_d2473.thumb.1000_0.png&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1678416650&t=3fa34a17cfe6aa35381f56df9b6beb4e",
-  "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fblog%2F202107%2F12%2F20210712160723_84b09.thumb.1000_0.jpg&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1678414223&t=bc725cf183137f0cda68edf40c47bc2c",
-  "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fitem%2F201706%2F30%2F20170630004557_GLmWV.jpeg&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1678416650&t=832065c437fd74931330b16289edbc8ag",
-  "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fblog%2F202106%2F13%2F20210613110106_f0776.thumb.1000_0.jpeg&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1678416650&t=7769d0745da4f0154390c8e15792a9ca",
-];
 
 class WechatConversataionPage extends ConsumerWidget {
   const WechatConversataionPage({

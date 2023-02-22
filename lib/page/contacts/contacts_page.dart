@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:random_avatar/random_avatar.dart';
 import 'package:random_string/random_string.dart';
 import 'package:username/username.dart';
 import 'package:wechat/hive/contacts_adapter.dart';

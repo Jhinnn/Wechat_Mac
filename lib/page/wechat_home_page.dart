@@ -3,12 +3,8 @@ import 'dart:convert';
 import 'package:desktop_multi_window/desktop_multi_window.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:wechat/hive/contacts_adapter.dart';
-import 'package:wechat/page/collect/collect_detail_page.dart';
 import 'package:wechat/page/collect/collect_page.dart';
-import 'package:wechat/page/contacts/contacts_detail_page.dart';
 import 'package:wechat/page/conversation/wechat_conversation_list_page.dart';
-import 'package:wechat/page/conversation/wechat_message_widget.dart';
 import 'package:wechat/hive/hive_tool.dart';
 import 'package:flutter_svg/svg.dart';
 
