@@ -7,7 +7,7 @@ import 'package:wechat/hive/conversation_list_adapter.dart';
 import 'package:wechat/hive/hive_tool.dart';
 import 'package:wechat/page/conversation/wechat_conversataion_list_widget.dart';
 import 'package:wechat/page/conversation/wechat_conversation_window.dart';
-
+import 'package:wechat/tools/random_image_url.dart';
 
 class WechatConversataionPage extends ConsumerWidget {
   const WechatConversataionPage({
@@ -52,18 +52,21 @@ class WechatConversataionPage extends ConsumerWidget {
                       width: 8,
                     ),
                     InkWell(
+                      onLongPress: () {
+                        dbUtil!.conversationListBox.clear();
+                      },
                       onTap: () {
                         ///添加联系人
-                        ConversationListModel conversation = ConversationListModel(
-                            conversationId: randomAlphaNumeric(15),
-                            userID: randomAlphaNumeric(20),
-                            userName: Username.cn().fullname,
-                            userIcon:
-                                "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fblog%2F202103%2F23%2F20210323132934_d2473.thumb.1000_0.png&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1678416650&t=3fa34a17cfe6aa35381f56df9b6beb4e",
-                            content: randomAlphaNumeric(20),
-                            conversationType: 1,
-                            isMute: 0,
-                            time: DateTime.now().toString());
+                        ConversationListModel conversation =
+                            ConversationListModel(
+                                conversationId: randomAlphaNumeric(15),
+                                userID: randomAlphaNumeric(20),
+                                userName: Username.cn().fullname,
+                                userIcon: RandomImageUrl.getUrl(),
+                                content: randomAlphaNumeric(20),
+                                conversationType: 1,
+                                isMute: 0,
+                                time: DateTime.now().toString());
                         dbUtil!.conversationListBox.add(conversation);
                       },
                       child: Container(
@@ -89,6 +92,7 @@ class WechatConversataionPage extends ConsumerWidget {
                               .toList()
                               .cast<ConversationListModel>();
                           return WechatConversataionListWidget(
+                            dbUtil,
                             result: result,
                             onTap: (index) {
                               dbUtil!.conversationListBox.deleteAt(index);

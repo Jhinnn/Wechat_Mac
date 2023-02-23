@@ -1,18 +1,23 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:wechat/hive/conversation_list_adapter.dart';
+import 'package:wechat/hive/hive_tool.dart';
 import 'package:wechat/page/wechat_home_page.dart';
 
+import '../../hive/conversation_adapter.dart';
+
 class WechatConversataionListWidget extends ConsumerWidget {
-  const WechatConversataionListWidget(
+  const WechatConversataionListWidget(this.dbUtil,
       {super.key, required this.onTap, required this.result});
   final Function(int) onTap;
+  final DBUtil? dbUtil;
   final List<ConversationListModel> result;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    int selectedIndex = ref.watch(conversationSelectedIndex);
+    int selectedIndex = ref.watch(conversationIndex);
     return ListView.builder(
         itemCount: result.length,
         itemBuilder: (_, index) {
@@ -20,12 +25,12 @@ class WechatConversataionListWidget extends ConsumerWidget {
           return InkWell(
             onTap: () {
               ref
-                  .read(conversationSelectedIndex.notifier)
+                  .read(conversationIndex.notifier)
                   .update((state) => state = index);
 
               ref
-                  .read(conversationIdIndex.notifier)
-                  .update((state) => state = conversationList.conversationId);
+                  .read(conversationModelProvider.notifier)
+                  .update((state) => state = result[index]);
             },
             child: Container(
               padding: const EdgeInsets.only(
@@ -54,8 +59,6 @@ class WechatConversataionListWidget extends ConsumerWidget {
                             width: 35,
                             height: 35,
                           )),
-                  // RandomAvatar(conversationList.userName,
-                  //     height: 35, width: 35, fit: BoxFit.fitWidth),
                   const SizedBox(width: 10),
                   SizedBox(
                     height: 38,
@@ -78,14 +81,23 @@ class WechatConversataionListWidget extends ConsumerWidget {
                                     fontSize: 10.5))
                           ],
                         ),
-                        Text(conversationList.content,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                                color: selectedIndex == index
-                                    ? Colors.grey[500]
-                                    : Colors.grey[400],
-                                fontSize: 12))
+                        if (dbUtil != null)
+                          ValueListenableBuilder(
+                              valueListenable:
+                                  dbUtil!.conversationBox.listenable(),
+                              builder: (context, value, child) {
+                                List list = value.values.toList();
+                                List<Conversation> conversation =
+                                    list[selectedIndex];
+                                return Text(conversation.last.content,
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                        color: selectedIndex == index
+                                            ? Colors.grey[500]
+                                            : Colors.grey[400],
+                                        fontSize: 12));
+                              })
                       ],
                     ),
                   )

@@ -1,19 +1,18 @@
 import 'dart:convert';
-
 import 'package:desktop_multi_window/desktop_multi_window.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:wechat/hive/conversation_list_adapter.dart';
 import 'package:wechat/page/collect/collect_page.dart';
 import 'package:wechat/page/conversation/wechat_conversation_list_page.dart';
 import 'package:wechat/hive/hive_tool.dart';
 import 'package:flutter_svg/svg.dart';
-
 import 'contacts/contacts_page.dart';
 
-final conversationSelectedIndex = StateProvider<int>((ref) => 1);
-final conversationIdIndex = StateProvider<String>((ref) => '');
+final conversationIndex = StateProvider<int>((ref) => 1); //选择的聊天的对象
+final conversationModelProvider =
+    StateProvider<ConversationListModel?>((ref) => null);
 final tabbarSelectedIndex = StateProvider<int>((ref) => 1);
-
 final pageIndexProvider = StateProvider<int>((ref) => 0);
 
 class WechatHomePage extends StatefulWidget {
@@ -26,7 +25,6 @@ class WechatHomePage extends StatefulWidget {
 class _WechatHomePageState extends State<WechatHomePage> {
   DBUtil? dbUtil;
 
-  List<String> collectList = ['全部收藏', '图片与视频', '链接', '笔记', '文件', '语音', '聊天记录'];
   @override
   void initState() {
     init();
@@ -59,162 +57,9 @@ class _WechatHomePageState extends State<WechatHomePage> {
             ),
           );
         }),
-       
-       
       ]),
     );
-  }
-
-/*
-  _conversatonListWidget() {
-    return FutureBuilder(
-      future: DefaultAssetBundle.of(context)
-          .loadString('json/conversation_list.json'),
-      builder: (context, snapshot) {
-        if (snapshot.data != null) {
-          ConversationListModel conversationListModel =
-              ConversationListModel.fromJson(
-                  json.decode(snapshot.data.toString()));
-          return Container(
-            width: 250,
-            color: const Color.fromRGBO(247, 247, 247, 1),
-            child: Column(
-              children: [
-                Container(
-                  height: 60,
-                  color: const Color.fromRGBO(247, 247, 247, 1),
-                  margin: const EdgeInsets.only(left: 13),
-                  child: Row(
-                    children: [
-                      ConstrainedBox(
-                        constraints: const BoxConstraints(
-                          maxHeight: 26,
-                          maxWidth: 190,
-                        ),
-                        child: TextField(
-                          decoration: InputDecoration(
-                            contentPadding: const EdgeInsets.only(left: 12),
-                            hintText: '搜索',
-                            hintStyle: const TextStyle(fontSize: 12),
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(4),
-                                borderSide: BorderSide.none),
-                            filled: true,
-                            fillColor: const Color.fromRGBO(233, 233, 233, 1),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 8,
-                      ),
-                      InkWell(
-                        onTap: () {
-                          // ConversationListModel conversationListModel =
-                          //     ConversationListModel(
-                          //         conversationId: randomAlphaNumeric(15),
-                          //         userID: randomAlphaNumeric(20),
-                          //         userName: randomAlphaNumeric(4),
-                          //         userIcon: "",
-                          //         content: randomAlphaNumeric(20),
-                          //         conversationType: 1,
-                          //         isMute: 0,
-                          //         time: "18:29");
-
-                          // dbUtil!.conversationListBox
-                          //     .add(conversationListModel);
-                        },
-                        child: Container(
-                            width: 26,
-                            height: 26,
-                            alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                                color: const Color.fromRGBO(233, 233, 233, 1),
-                                borderRadius: BorderRadius.circular(4)),
-                            child: const Icon(Icons.add_outlined,
-                                size: 18, color: Colors.grey)),
-                      )
-                    ],
-                  ),
-                ),
-                Expanded(
-                    child: ListView.builder(
-                        itemCount:
-                            conversationListModel.conversationList!.length,
-                        itemBuilder: (_, index) {
-                          ConversationList conversationList =
-                              conversationListModel.conversationList![index];
-                          return Container(
-                            margin: const EdgeInsets.only(
-                              left: 12,
-                              right: 8,
-                            ),
-                            height: 68,
-                            child: Row(
-                              children: [
-                                conversationList.type == "0"
-                                    ? ClipRRect(
-                                        borderRadius: BorderRadius.circular(4),
-                                        child: CachedNetworkImage(
-                                          imageUrl: conversationList.icon!,
-                                          width: 35,
-                                          height: 35,
-                                        ))
-                                    : ClipRRect(
-                                        borderRadius: BorderRadius.circular(4),
-                                        child: CachedNetworkImage(
-                                          imageUrl: conversationList
-                                              .numbers!.first.icon!,
-                                          width: 35,
-                                          height: 35,
-                                        )),
-                                const SizedBox(width: 10),
-                                SizedBox(
-                                  height: 44,
-                                  width: 182,
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(conversationList.userName!,
-                                              style: const TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 14)),
-                                          Text(conversationList.time!,
-                                              style: TextStyle(
-                                                  color: Colors.grey[400],
-                                                  fontSize: 10.5))
-                                        ],
-                                      ),
-                                      const SizedBox(height: 6),
-                                      Text(conversationList.content!,
-                                          maxLines: 1,
-                                          overflow: TextOverflow.ellipsis,
-                                          style: TextStyle(
-                                              color: Colors.grey[400],
-                                              fontSize: 12))
-                                    ],
-                                  ),
-                                )
-                              ],
-                            ),
-                          );
-                        }))
-              ],
-            ),
-          );
-        } else {
-          return Container();
-        }
-      },
-    );
-  }
-  */
-
-  
+  }  
 }
 
 class WechatTabbar extends ConsumerWidget {

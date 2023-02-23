@@ -1,4 +1,3 @@
-
 import 'package:bubble/bubble.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +19,6 @@ class WechatMessageWidget extends StatefulWidget {
 }
 
 class _WechatMessageWidgetState extends State<WechatMessageWidget> {
-  List<Conversation> newMessageList = [];
 
   @override
   void initState() {
@@ -37,70 +35,66 @@ class _WechatMessageWidgetState extends State<WechatMessageWidget> {
             if (value.isEmpty || widget.conversationId.isEmpty) {
               return Container();
             } else {
-              List<ConversationModel> result =
-                  value.values.toList().cast<ConversationModel>();
-              List<ConversationModel> conversationModelList = result
-                  .where((element) =>
-                      element.conversationId == widget.conversationId)
-                  .toList();
-              if (conversationModelList.isEmpty) {
-                return Container();
+              List? conversationList =
+                  widget.dbUtil!.conversationBox.get(widget.conversationId);
+              if (conversationList != null) {
+                if (conversationList.isEmpty) {
+                  return Container();
+                } else {
+                  conversationList = conversationList.reversed.toList();
+                  return ListView.builder(
+                      reverse: true,
+                      padding:
+                          const EdgeInsets.only(left: 20, top: 10, right: 20),
+                      itemBuilder: (_, index) {
+                        return conversationList![index].isSelf
+                            ? selfChat(conversationList[index])
+                            : otherChat(conversationList[index]);
+                      },
+                      itemCount: conversationList.length);
+                }
               } else {
-                List<Conversation> converstaionList = conversationModelList
-                    .first.converstaionList
-                    .cast<Conversation>();
-                converstaionList = converstaionList.reversed.toList();
-                // return CustomScrollView(
-                //   controller: ScrollController(),
-                //   reverse: true,
-                //   center: valueKey,
-                //   slivers: [
-                //     //我们的列表是 reverse 的，所以需要将新数据的 SliverList 放在 centerKey 的上面，把旧数据的 SliverList放在 centerKey 下面
-                //     SliverList(
-                //       delegate: SliverChildBuilderDelegate(
-                //         (BuildContext context, int index) {
-                //           return newMessageList[index].isSelf
-                //               ? selfChat(newMessageList[index])
-                //               : otherChat(newMessageList[index]);
-                //         },
-                //         childCount: newMessageList.length,
-                //       ),
-                //     ),
-                //     const SliverPadding(
-                //       padding: EdgeInsets.only(top: 120),
-                //       key: valueKey,
-                //     ),
-                //     SliverList(
-                //       delegate: SliverChildBuilderDelegate(
-                //         (BuildContext context, int index) {
-                //           // var item = loadMoreData[index];
-                //           return converstaionList[index].isSelf
-                //               ? selfChat(converstaionList[index])
-                //               : otherChat(converstaionList[index]);
-                //         },
-                //         childCount: converstaionList.length,
-                //       ),
-                //     ),
-                //   ],
-                // );
-                return result.isEmpty
-                    ? Container()
-                    : ListView.builder(
-                        reverse: true,
-                        padding:
-                            const EdgeInsets.only(left: 20, top: 10, right: 20),
-                        itemBuilder: (_, index) {
-                          return converstaionList[index].isSelf
-                              ? selfChat(converstaionList[index])
-                              : otherChat(converstaionList[index]);
-                        },
-                        itemCount: converstaionList.length);
+                return Container();
               }
             }
           });
     } else {
       return Container();
     }
+
+    // return CustomScrollView(
+    //   controller: ScrollController(),
+    //   reverse: true,
+    //   center: valueKey,
+    //   slivers: [
+    //     //我们的列表是 reverse 的，所以需要将新数据的 SliverList 放在 centerKey 的上面，把旧数据的 SliverList放在 centerKey 下面
+    //     SliverList(
+    //       delegate: SliverChildBuilderDelegate(
+    //         (BuildContext context, int index) {
+    //           return newMessageList[index].isSelf
+    //               ? selfChat(newMessageList[index])
+    //               : otherChat(newMessageList[index]);
+    //         },
+    //         childCount: newMessageList.length,
+    //       ),
+    //     ),
+    //     const SliverPadding(
+    //       padding: EdgeInsets.only(top: 120),
+    //       key: valueKey,
+    //     ),
+    //     SliverList(
+    //       delegate: SliverChildBuilderDelegate(
+    //         (BuildContext context, int index) {
+    //           // var item = loadMoreData[index];
+    //           return converstaionList[index].isSelf
+    //               ? selfChat(converstaionList[index])
+    //               : otherChat(converstaionList[index]);
+    //         },
+    //         childCount: converstaionList.length,
+    //       ),
+    //     ),
+    //   ],
+    // );
 
     // return FutureBuilder(
     //     future:
@@ -149,19 +143,13 @@ class _WechatMessageWidgetState extends State<WechatMessageWidget> {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        InkWell(
-          onTap: () {
-            // getNewConverstaionList();
-            // setState(() {});
-          },
-          child: ClipRRect(
-              borderRadius: BorderRadius.circular(4),
-              child: CachedNetworkImage(
-                imageUrl: conversation.userIcon,
-                width: 32,
-                height: 32,
-              )),
-        ),
+        ClipRRect(
+            borderRadius: BorderRadius.circular(4),
+            child: CachedNetworkImage(
+              imageUrl: conversation.userIcon,
+              width: 32,
+              height: 32,
+            )),
         const SizedBox(
           width: 8,
         ),
@@ -189,7 +177,7 @@ class _WechatMessageWidgetState extends State<WechatMessageWidget> {
                   constraints: BoxConstraints.loose(const Size(280, 1000)),
                   child: Text(
                     conversation.content,
-                    maxLines: 10,
+                    maxLines: 30,
                     style: const TextStyle(height: 1.3, fontSize: 13.5),
                   )),
             ),
@@ -229,7 +217,7 @@ class _WechatMessageWidgetState extends State<WechatMessageWidget> {
                   constraints: BoxConstraints.loose(const Size(280, 1000)),
                   child: Text(
                     conversation.content,
-                    maxLines: 10,
+                    maxLines: 30,
                     style: const TextStyle(height: 1.3, fontSize: 13.5),
                   )),
             ),

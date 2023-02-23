@@ -3,12 +3,10 @@ import 'package:hive/hive.dart';
 @HiveType(typeId: 4)
 class ConversationModel {
   ConversationModel(
-      {required this.conversationId, required this.converstaionList});
-  @HiveField(0)
-  late String conversationId;
+      {required this.conversationMap});
 
-  @HiveField(1)
-  late List<dynamic> converstaionList;
+  @HiveField(0)
+  late Map<String, List<Conversation>> conversationMap;
 }
 
 class ConversationModelAdapters extends TypeAdapter<ConversationModel> {
@@ -17,14 +15,12 @@ class ConversationModelAdapters extends TypeAdapter<ConversationModel> {
 
   @override
   void write(BinaryWriter writer, ConversationModel obj) {
-    writer.write(obj.conversationId);
-    writer.write(obj.converstaionList);
+    writer.write(obj.conversationMap);
   }
 
   @override
   ConversationModel read(BinaryReader reader) {
-    return ConversationModel(
-        conversationId: reader.read(), converstaionList: reader.read());
+    return ConversationModel(conversationMap: reader.read());
   }
 }
 
